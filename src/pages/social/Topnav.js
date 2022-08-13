@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Topnav = () => {
 	const location = useLocation();
@@ -25,8 +25,9 @@ const Topnav = () => {
 							/>
 						</svg>
 					</button>
+
 					<div class="flex space-x-4">
-						<div hidden class="md:block">
+						{/* <div hidden class="md:block">
 							<div class="relative flex items-center text-gray-400 focus-within:text-cyan-400">
 								<span class="absolute left-4 h-6 flex items-center pr-3 border-r border-gray-300">
 									<svg
@@ -66,7 +67,15 @@ const Topnav = () => {
 									d="M35.508,31.127l-7.01-7.01a1.686,1.686,0,0,0-1.2-.492H26.156a14.618,14.618,0,1,0-2.531,2.531V27.3a1.686,1.686,0,0,0,.492,1.2l7.01,7.01a1.681,1.681,0,0,0,2.384,0l1.99-1.99a1.7,1.7,0,0,0,.007-2.391Zm-20.883-7.5a9,9,0,1,1,9-9A8.995,8.995,0,0,1,14.625,23.625Z"
 								></path>
 							</svg>
-						</button>
+						</button> */}
+						<Link to="/post/new">
+							<button
+								aria-label="notification"
+								class="w-auto px-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200"
+							>
+								<p>New Post</p>
+							</button>
+						</Link>
 						<button
 							aria-label="chat"
 							class="w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200"

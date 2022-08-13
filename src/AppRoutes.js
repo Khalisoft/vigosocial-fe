@@ -7,7 +7,8 @@ import MessageView from "./pages/social/message/MessageView";
 import Followers from "./pages/social/profile/Followers";
 import Following from "./pages/social/profile/Following";
 import Profile from "./pages/social/profile/Profile";
-import Post from "./pages/social/timeline/Post";
+import PostNew from "./pages/social/timeline/PostNew";
+import Post from "./pages/social/timeline/PostNew";
 import Timeline from "./pages/social/timeline/Timeline";
 import Users from "./pages/social/timeline/Users";
 const AppRoutes = () => {
@@ -83,6 +84,14 @@ const AppRoutes = () => {
 					element={
 						<PrivateRoute auth={auth}>
 							<Post />
+						</PrivateRoute>
+					}
+				/>
+				<Route
+					path="/post/new"
+					element={
+						<PrivateRoute auth={auth}>
+							<PostNew />
 						</PrivateRoute>
 					}
 				/>
