@@ -35,12 +35,28 @@ export const getAllUsers = async () => {
 		data,
 	};
 };
-
-export const GetUsers = async () => {
-	// const { data } = useSWR(`/users/all`, fetcher);
+export const getUserDetails = async (id) => {
+	const { data } = await API.get(`/users/${id}`);
 	// console.log(data);
+	return {
+		data,
+	};
+};
+export const getFollowers = async () => {
+	const { data } = await API.get(`/followers`);
+	return {
+		data,
+	};
+};
+export const getFollowing = async () => {
+	const { data } = await API.get(`/following`);
+	return {
+		data,
+	};
 };
 
+export const follow = async (data) => API.patch(`/users/${data}/follow`);
+export const unfollow = async (data) => API.patch(`/users/${data}/unfollow`);
 // const useFetchPosts
 
 // export const useGetUser = (id) => {

@@ -1,5 +1,15 @@
 import create from "zustand";
-import { getAllUsers, getUserProfile, signin, signup } from "../api/api";
+import {
+	getAllUsers,
+	follow,
+	unfollow,
+	getUserProfile,
+	signin,
+	signup,
+	getFollowing,
+	getFollowers,
+	getUserDetails,
+} from "../api/api";
 import { GetUsers } from "./../api/api";
 
 const handleGetAuth = async (set, get, params) => {
@@ -46,17 +56,44 @@ const handleGetUsers = async (set, get) => {
 	set(() => ({ users: data }));
 	return data;
 };
+const handleGetFollowers = async (set, get) => {
+	const { data } = await getFollowers();
+	set(() => ({ followers: data.followers }));
+	return data;
+};
+const handleGetFollowing = async (set, get) => {
+	const { data } = await getFollowing();
+	set(() => ({ following: data.following }));
+	return data;
+};
+const handleGetUser = async (set, get, params) => {
+	// console.log(params);
+	const { data } = await getUserDetails(params);
+	return data;
+};
+
+const handleFollow = async (set, get, params) => {
+	const res = (await follow(params)) ? true : false;
+	await handleGetFollowers(set, get);
+	if (res) return await handleGetUsers(set, get);
+};
+const handleUnFollow = async (set, get, params) => {
+	const res = (await unfollow(params)) ? true : false;
+	await handleGetFollowing(set, get);
+	if (res) return await handleGetUsers(set, get);
+};
 
 const usersStore = (set, get) => ({
 	users: [],
 	followers: [],
 	following: [],
 
+	getUser: async (params) => await handleGetUser(set, get, params),
 	getUsers: async () => await handleGetUsers(set, get),
-	// follow: async (params) => await handleFollow(set, get, params),
-	// unFollow: async (params) => await handleUnFollow(set, get, params),
-	// getFollowers: async (params) => await handleGetFollowers(set, get, params),
-	// getFollowing: async (params) => await handleGetFollowing(set, get, params),
+	follow: async (params) => await handleFollow(set, get, params),
+	unfollow: async (params) => await handleUnFollow(set, get, params),
+	getFollowers: async (params) => await handleGetFollowers(set, get, params),
+	getFollowing: async (params) => await handleGetFollowing(set, get, params),
 });
 
 const messageStore = (set, get) => ({

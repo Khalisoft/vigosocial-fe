@@ -1,7 +1,11 @@
 import FollowerItem from "./FollowerItem";
+import { useUsers, useAuth } from "./../../../data/store/store";
 
 const Followers = () => {
-	const followers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+	const { followers, getUser } = useUsers((state) => state);
+	const { authData } = useAuth((state) => state);
+
+	// console.log(followers);
 	return (
 		<div>
 			<div class="py-8 h-full">

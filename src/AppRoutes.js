@@ -17,12 +17,16 @@ import { fetcher, GetUsers } from "./data/api/api";
 import useSWR from "swr";
 const AppRoutes = () => {
 	const { auth, getAuth, getUserProfile } = useAuth((state) => state);
-	const { users, getUsers } = useUsers((state) => state);
+	const { users, getUsers, getFollowers, getFollowing } = useUsers(
+		(state) => state
+	);
 
 	useEffect(() => {
 		getAuth();
 		getUserProfile();
 		getUsers();
+		getFollowers();
+		getFollowing();
 	}, []);
 
 	const PrivateRoute = ({ auth, children }) => {

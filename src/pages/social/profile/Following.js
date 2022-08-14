@@ -1,6 +1,8 @@
 import FollowingItem from "./FollowingItem";
+import { useUsers, useAuth } from "./../../../data/store/store";
+
 const Following = () => {
-	const following = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+	const { following, getUser } = useUsers((state) => state);
 	return (
 		<div>
 			<div class="py-8 h-full">
