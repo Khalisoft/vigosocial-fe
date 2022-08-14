@@ -1,7 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { vigoLogo } from "../../assets/img";
+import { useAuth } from "./../../data/store/store";
+import { useState } from "react";
 
 const Signup = () => {
+	const [email, setEmail] = useState("");
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [phone, setPhone] = useState("");
+
+	const navigate = useNavigate();
+
+	const { signup } = useAuth((state) => state);
+	const signupFn = async () => {
+		const res = await signup({
+			email,
+			username,
+			password,
+			firstName,
+			lastName,
+			phone,
+		});
+		res && navigate("/sigin");
+	};
 	return (
 		<div>
 			<div
@@ -12,21 +35,29 @@ const Signup = () => {
 					<div class="m-auto space-y-8 md:w-8/12 lg:w-full">
 						<div class="rounded-xl border  bg-opacity-50 backdrop-blur-2xl bg-white shadow-xl">
 							<div class="lg:grid lg:grid-cols-2">
-								{/* <div class="rounded-lg lg:block" hidden>
-                                    
-                                </div> */}
 								<div class="p-6 sm:p-16">
 									<h2 class="mb-8 text-2xl text-cyan-900 font-bold">
-										Sign up today
+										Sign up now, meet new people.
 									</h2>
 									<div class="space-y-8">
 										<div class="space-y-2">
 											<input
-												type="email"
-												name="email"
-												id="email"
+												type="firstName"
+												name="firstName"
+												id="firstName"
 												class="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300 focus:ring-2 focus:ring-purple-300 focus:outline-none invalid:ring-2 invalid:ring-red-400"
-												placeholder="Email"
+												placeholder="First Name"
+												onChange={(e) => setFirstName(e.target.value)}
+											/>
+										</div>
+										<div class="space-y-2">
+											<input
+												type="lastName"
+												name="lastName"
+												id="lastName"
+												class="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300 focus:ring-2 focus:ring-purple-300 focus:outline-none invalid:ring-2 invalid:ring-red-400"
+												placeholder="Last Name"
+												onChange={(e) => setLastName(e.target.value)}
 											/>
 										</div>
 										<div class="space-y-2">
@@ -36,24 +67,17 @@ const Signup = () => {
 												id="email"
 												class="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300 focus:ring-2 focus:ring-purple-300 focus:outline-none invalid:ring-2 invalid:ring-red-400"
 												placeholder="Email"
+												onChange={(e) => setEmail(e.target.value)}
 											/>
 										</div>
 										<div class="space-y-2">
 											<input
-												type="email"
-												name="email"
-												id="email"
+												type="phone"
+												name="phone"
+												id="phone"
 												class="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300 focus:ring-2 focus:ring-purple-300 focus:outline-none invalid:ring-2 invalid:ring-red-400"
-												placeholder="Email"
-											/>
-										</div>
-										<div class="space-y-2">
-											<input
-												type="email"
-												name="email"
-												id="email"
-												class="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300 focus:ring-2 focus:ring-purple-300 focus:outline-none invalid:ring-2 invalid:ring-red-400"
-												placeholder="Email"
+												placeholder="Phone Number"
+												onChange={(e) => setPhone(e.target.value)}
 											/>
 										</div>
 									</div>
@@ -62,11 +86,12 @@ const Signup = () => {
 									<div class="space-y-8 mt-16">
 										<div class="space-y-2">
 											<input
-												type="email"
-												name="email"
-												id="email"
+												type="username"
+												name="username"
+												id="username"
 												class="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300 focus:ring-2 focus:ring-purple-300 focus:outline-none invalid:ring-2 invalid:ring-red-400"
-												placeholder="Email"
+												placeholder="Username"
+												onChange={(e) => setUsername(e.target.value)}
 											/>
 										</div>
 
@@ -80,12 +105,13 @@ const Signup = () => {
 												class="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
                                             focus:ring-2 focus:ring-purple-300 focus:outline-none
                                             invalid:ring-2 invalid:ring-red-400"
+												onChange={(e) => setPassword(e.target.value)}
 											/>
 										</div>
 
 										<button
 											onClick={() => {
-												alert("signin");
+												signupFn();
 											}}
 											// disabled={true}
 											class="w-full py-3 px-6 rounded-md bg-purple-600

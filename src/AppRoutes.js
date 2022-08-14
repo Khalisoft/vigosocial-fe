@@ -11,8 +11,19 @@ import PostNew from "./pages/social/timeline/PostNew";
 import Post from "./pages/social/timeline/PostNew";
 import Timeline from "./pages/social/timeline/Timeline";
 import Users from "./pages/social/timeline/Users";
+import { useAuth, useUsers } from "./data/store/store";
+import { useEffect } from "react";
+import { fetcher, GetUsers } from "./data/api/api";
+import useSWR from "swr";
 const AppRoutes = () => {
-	const auth = true;
+	const { auth, getAuth, getUserProfile } = useAuth((state) => state);
+	const { users, getUsers } = useUsers((state) => state);
+
+	useEffect(() => {
+		getAuth();
+		getUserProfile();
+		getUsers();
+	}, []);
 
 	const PrivateRoute = ({ auth, children }) => {
 		return auth ? (

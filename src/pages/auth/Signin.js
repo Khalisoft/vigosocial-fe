@@ -1,7 +1,16 @@
 import { vigoLogo } from "../../assets/img";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useAuth } from "./../../data/store/store";
 
 const Signin = () => {
+	const { signin } = useAuth((state) => state);
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+
+	const signinFn = (e) => {
+		signin({ username, password });
+	};
 	return (
 		<div>
 			<div
@@ -18,16 +27,17 @@ const Signin = () => {
 								<div class="p-6 sm:p-16"></div>
 								<div class="p-6 sm:p-16">
 									<h2 class="mb-8 text-2xl text-cyan-900 font-bold">
-										Sign in to continue
+										Sign in, link up with friends!
 									</h2>
-									<form action="" class="space-y-8">
+									<div class="space-y-8">
 										<div class="space-y-2">
 											<input
-												type="email"
-												name="email"
-												id="email"
+												type="text"
+												name="username"
+												id="username"
 												class="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300 focus:ring-2 focus:ring-purple-300 focus:outline-none invalid:ring-2 invalid:ring-red-400"
-												placeholder="Email"
+												placeholder="Username"
+												onChange={(e) => setUsername(e.target.value)}
 											/>
 										</div>
 
@@ -40,6 +50,7 @@ const Signin = () => {
 												class="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
                                             focus:ring-2 focus:ring-purple-300 focus:outline-none
                                             invalid:ring-2 invalid:ring-red-400"
+												onChange={(e) => setPassword(e.target.value)}
 											/>
 											<div class="flex items-center justify-end">
 												<button class="p-2 -mr-2" type="reset">
@@ -52,7 +63,7 @@ const Signin = () => {
 
 										<button
 											onClick={() => {
-												alert("signin");
+												signinFn();
 											}}
 											// disabled={true}
 											class="w-full py-3 px-6 rounded-md bg-purple-600
@@ -67,7 +78,7 @@ const Signin = () => {
 												Sign Up
 											</Link>
 										</p>
-									</form>
+									</div>
 								</div>
 							</div>
 						</div>

@@ -1,8 +1,10 @@
 import { vigoLogo } from "../../../assets/img";
 import UserItem from "./UserItem";
+import { useUsers } from "./../../../data/store/store";
 
 const Users = () => {
-	const users = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+	const { users } = useUsers((state) => state);
+	// const users = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 	return (
 		<div>
 			<div class="py-8 h-full">

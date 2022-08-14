@@ -1,7 +1,14 @@
+import { useAuth } from "./../../data/store/store";
 const Logout = () => {
+	const { signout } = useAuth((state) => state);
+
+	const signoutFn = () => signout();
 	return (
 		<div>
-			<button class="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
+			<button
+				onClick={signoutFn}
+				class="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group"
+			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-6 w-6"
